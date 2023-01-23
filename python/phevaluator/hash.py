@@ -1,4 +1,6 @@
 """Module hashing cards."""
+from __future__ import annotations
+
 from .tables import CHOOSE, DP
 
 

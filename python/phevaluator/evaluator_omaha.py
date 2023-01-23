@@ -1,4 +1,6 @@
 """Module evaluating cards in Omaha game."""
+from __future__ import annotations
+
 from typing import Union
 
 from .card import Card

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import unittest
 
 from phevaluator.tables import NO_FLUSH_7

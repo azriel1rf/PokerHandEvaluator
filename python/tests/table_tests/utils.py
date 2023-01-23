@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import unittest
 from itertools import combinations, combinations_with_replacement, permutations
 
