@@ -4,11 +4,11 @@ from __future__ import annotations
 from .tables import CHOOSE, DP
 
 
-def hash_quinary(quinary: list[int], num_cards: int) -> int:
+def hash_quinary(quinary: [int], num_cards: int) -> int:
     """Hash list of cards.
 
     Args:
-        quinary (list[int]): List of the count of the cards.
+        quinary ([int]): List of the count of the cards.
         num_cards (int): The number of cards.
 
     Returns:

@@ -12,7 +12,7 @@ from phevaluator import (
 )
 
 
-def evaluate_omaha_exhaustive(community_cards: list[int], hole_cards: list[int]) -> int:
+def evaluate_omaha_exhaustive(community_cards: [int], hole_cards: [int]) -> int:
     """Evaluate omaha cards with `_evaluate_cards`."""
     best_rank = min(
         _evaluate_cards(c1, c2, c3, h1, h2)

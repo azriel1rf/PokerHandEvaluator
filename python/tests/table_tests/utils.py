@@ -8,8 +8,8 @@ from phevaluator.tables import NO_FLUSH_5
 
 
 class BaseTestNoFlushTable(unittest.TestCase):
-    TABLE: list[int] = NotImplemented
-    VISIT: list[int] = NotImplemented
+    TABLE: [int] = NotImplemented
+    VISIT: [int] = NotImplemented
     NUM_CARDS: int = NotImplemented
 
     @classmethod
