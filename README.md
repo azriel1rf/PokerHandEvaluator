@@ -85,6 +85,11 @@ of accessing the pre-generated random samples in the memory.
 
 ## Python Implementation
 
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/HenryRLee/PokerHandEvaluator/CI?color=green&logo=github)](https://github.com/HenryRLee/PokerHandEvaluator/actions/workflows/ci.yml)
+[![PyPI version](https://badge.fury.io/py/phevaluator.svg)](https://badge.fury.io/py/phevaluator)
+[![PyPI downloads](https://img.shields.io/pypi/dm/phevaluator)](https://shields.io/category/downloads)
+[![Apache_2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://github.com/HenryRLee/PokerHandEvaluator/blob/master/python/LICENSE)
+
 The [python](python) subdirectory has the latest Python implementation.
 
 Currently it supports 5-card, 6-card and 7-card poker hands evaluation, as well
