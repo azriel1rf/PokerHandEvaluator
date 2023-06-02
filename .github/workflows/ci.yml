@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          lfs: true
       - name: Run before script
         run: |
           mkdir -p cpp/build
@@ -23,6 +25,7 @@ jobs:
           ./c_example
           ./cpp_example
           ./omaha_example
+          ./plo5_example
           ./unit_tests
 #     - name: Setup Zig
 #       uses: goto-bus-stop/setup-zig@v1.3.0
@@ -64,6 +67,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          lfs: true
       - name: Run before script
         run: |
           mkdir -p cpp/build

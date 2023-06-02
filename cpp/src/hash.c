@@ -1,5 +1,5 @@
 /*
- *  Copyright 2016 Henry Lee
+ *  Copyright 2016-2023 Henry Lee
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 #include <stdio.h>
 #include "tables.h"
+#include "hash.h"
 
 int hash_quinary(const unsigned char q[], int k)
 {
