@@ -9,21 +9,21 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_C_STANDARD 99)
 
-option(BUILD_TESTS     "Build test ON/OFF"     ON)
+option(BUILD_CARD5 "Build 5-card standalone library" ON)
+option(BUILD_CARD6 "Build 6-card standalone library" ON)
+option(BUILD_CARD7 "Build 7-card standalone library" ON)
+option(BUILD_OMAHA "Build Omaha library" ON)
+option(BUILD_PLO5 "Build PLO5 library" ON)
+option(BUILD_TESTS "Build test ON/OFF" ON)
 option(BUILD_EXAMPLES "Build examples ON/OFF" ON)
 
-# Add the PokerHandEvaluator library
 add_library(pheval STATIC
   src/dptables.c
-  src/evaluator_omaha.c
-  src/evaluator_omaha.cc
-  src/evaluator_plo5.c
-  src/evaluator_plo5.cc
-  src/tables_omaha.c
-  src/tables_plo5.c
-  src/evaluator.cc
+  src/evaluator5.cc
   src/evaluator5.c
+  src/evaluator6.cc
   src/evaluator6.c
+  src/evaluator7.cc
   src/evaluator7.c
   src/hash.c
   src/hand.cc
@@ -34,17 +34,137 @@ add_library(pheval STATIC
   src/rank.c
   src/7462.c
 )
-target_include_directories(pheval PUBLIC 
+target_include_directories(pheval PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include/>)
 target_compile_options(pheval PUBLIC -O3)
-set(PUB_HEADERS include/phevaluator/phevaluator.h
+set(PUB_HEADERS include/phevaluator/phevaluator5.h
                 include/phevaluator/card.h
-                include/phevaluator/hand.h
                 include/phevaluator/rank.h)
 set_target_properties(pheval PROPERTIES
     VERSION ${PROJECT_VERSION}
     PUBLIC_HEADER "${PUB_HEADERS}")
+
+if (BUILD_CARD5)
+  add_library(pheval5 STATIC
+    src/dptables.c
+    src/evaluator5.c
+    src/evaluator5.cc
+    src/hashtable5.c
+    src/hashtable.c
+    src/hash.c
+  )
+  target_include_directories(pheval5 PUBLIC
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+      $<INSTALL_INTERFACE:include/>)
+  target_compile_options(pheval5 PUBLIC -O3)
+  set(PUB_HEADERS include/phevaluator/phevaluator.h
+                  include/phevaluator/card.h
+                  include/phevaluator/rank.h)
+  set_target_properties(pheval5 PROPERTIES
+      VERSION ${PROJECT_VERSION}
+      PUBLIC_HEADER "${PUB_HEADERS}")
+endif()
+
+if (BUILD_CARD6)
+  add_library(pheval6 STATIC
+    src/dptables.c
+    src/evaluator6.c
+    src/evaluator6.cc
+    src/hashtable6.c
+    src/hashtable.c
+    src/hash.c
+  )
+  target_include_directories(pheval6 PUBLIC
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+      $<INSTALL_INTERFACE:include/>)
+  target_compile_options(pheval6 PUBLIC -O3)
+  set(PUB_HEADERS include/phevaluator/phevaluator.h
+                  include/phevaluator/card.h
+                  include/phevaluator/rank.h)
+  set_target_properties(pheval6 PROPERTIES
+      VERSION ${PROJECT_VERSION}
+      PUBLIC_HEADER "${PUB_HEADERS}")
+endif()
+
+if (BUILD_CARD7)
+  add_library(pheval7 STATIC
+    src/dptables.c
+    src/evaluator7.c
+    src/evaluator7.cc
+    src/hashtable7.c
+    src/hashtable.c
+    src/hash.c
+  )
+  target_include_directories(pheval7 PUBLIC
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+      $<INSTALL_INTERFACE:include/>)
+  target_compile_options(pheval7 PUBLIC -O3)
+  set(PUB_HEADERS include/phevaluator/phevaluator.h
+                  include/phevaluator/card.h
+                  include/phevaluator/rank.h)
+  set_target_properties(pheval7 PROPERTIES
+      VERSION ${PROJECT_VERSION}
+      PUBLIC_HEADER "${PUB_HEADERS}")
+endif()
+
+if (BUILD_OMAHA)
+  add_library(phevalomaha STATIC
+    src/dptables.c
+    src/evaluator_omaha.c
+    src/evaluator_omaha.cc
+    src/tables_omaha.c
+    src/hash.c
+    src/hand.cc
+    src/hashtable.c
+    src/rank.c
+    src/7462.c
+  )
+  target_include_directories(phevalomaha PUBLIC
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+      $<INSTALL_INTERFACE:include/>)
+  target_compile_options(phevalomaha PUBLIC -O3)
+  set(PUB_HEADERS include/phevaluator/phevaluator.h
+                  include/phevaluator/card.h
+                  include/phevaluator/rank.h)
+  set_target_properties(phevalomaha PROPERTIES
+      VERSION ${PROJECT_VERSION}
+      PUBLIC_HEADER "${PUB_HEADERS}")
+endif()
+
+if (BUILD_PLO5)
+  set(plo5_source_tar "${CMAKE_CURRENT_SOURCE_DIR}/src/tables_plo5.tar.gz")
+  set(plo5_source_code "${CMAKE_CURRENT_SOURCE_DIR}/src/tables_plo5.c")
+  add_custom_command(
+    OUTPUT "${plo5_source_code}"
+    COMMAND ${CMAKE_COMMAND} -E tar xvzf "${plo5_source_tar}"
+    MAIN_DEPENDENCY ${plo5_source_tar}
+    COMMENT "Unpacking ${plo5_source_code}"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src"
+  )
+
+  add_library(phevalplo5 STATIC
+    src/dptables.c
+    src/evaluator_plo5.c
+    src/evaluator_plo5.cc
+    src/tables_plo5.c
+    src/hash.c
+    src/hand.cc
+    src/hashtable.c
+    src/rank.c
+    src/7462.c
+  )
+  target_include_directories(phevalplo5 PUBLIC
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+      $<INSTALL_INTERFACE:include/>)
+  target_compile_options(phevalplo5 PUBLIC -O3)
+  set(PUB_HEADERS include/phevaluator/phevaluator.h
+                  include/phevaluator/card.h
+                  include/phevaluator/rank.h)
+  set_target_properties(phevalplo5 PROPERTIES
+      VERSION ${PROJECT_VERSION}
+      PUBLIC_HEADER "${PUB_HEADERS}")
+endif()
 
 if (BUILD_TESTS)
   include(FetchContent)
@@ -75,7 +195,7 @@ if (BUILD_TESTS)
     test/kev/kev_eval.c
   )
   target_compile_options(unit_tests PUBLIC -O3)
-  target_link_libraries(unit_tests gtest_main pheval)
+  target_link_libraries(unit_tests gtest_main pheval phevalomaha phevalplo5)
 
   add_test(NAME unit_tests COMMAND unit_tests)
 
@@ -83,7 +203,33 @@ if (BUILD_TESTS)
     benchmark/benchmark.cc
   )
   target_compile_options(benchmark_phevaluator PUBLIC -O3)
-  target_link_libraries(benchmark_phevaluator benchmark pheval)
+  target_link_libraries(benchmark_phevaluator benchmark pheval phevalomaha phevalplo5)
+
+  set(CMAKE_BUILD_TYPE "DEBUG") # Trying to enable assert in the following tests
+
+  add_executable(unit_tests_evaluator5_standalone
+    test/evaluation5_standalone.cc
+    test/kev/fast_eval.c
+    test/kev/kev_eval.c
+  )
+  target_compile_options(unit_tests_evaluator5_standalone PUBLIC -O3)
+  target_link_libraries(unit_tests_evaluator5_standalone pheval5)
+
+  add_executable(unit_tests_evaluator6_standalone
+    test/evaluation6_standalone.cc
+    test/kev/fast_eval.c
+    test/kev/kev_eval.c
+  )
+  target_compile_options(unit_tests_evaluator6_standalone PUBLIC -O3)
+  target_link_libraries(unit_tests_evaluator6_standalone pheval6)
+
+  add_executable(unit_tests_evaluator7_standalone
+    test/evaluation7_standalone.cc
+    test/kev/fast_eval.c
+    test/kev/kev_eval.c
+  )
+  target_compile_options(unit_tests_evaluator7_standalone PUBLIC -O3)
+  target_link_libraries(unit_tests_evaluator7_standalone pheval7)
 endif()
 
 if (BUILD_EXAMPLES)
@@ -100,12 +246,12 @@ if (BUILD_EXAMPLES)
   add_executable(omaha_example
     examples/omaha_example.cc
   )
-  target_link_libraries(omaha_example pheval)
+  target_link_libraries(omaha_example phevalomaha)
 
   add_executable(plo5_example
     examples/plo5_example.cc
   )
-  target_link_libraries(plo5_example pheval)
+  target_link_libraries(plo5_example phevalplo5)
 endif()
 
 # Install library
@@ -117,25 +263,37 @@ if (UNIX)
       ARCHIVE DESTINATION ${CMAKE_INSTALL_DIR}
       PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/phevaluator)
 
+  install(TARGETS phevalomaha
+      EXPORT phevalTargets
+      LIBRARY DESTINATION ${CMAKE_INSTALL_DIR}
+      ARCHIVE DESTINATION ${CMAKE_INSTALL_DIR}
+      PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/phevaluator)
+
+  install(TARGETS phevalplo5
+      EXPORT phevalTargets
+      LIBRARY DESTINATION ${CMAKE_INSTALL_DIR}
+      ARCHIVE DESTINATION ${CMAKE_INSTALL_DIR}
+      PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/phevaluator)
+
   #install find_package script
   install(EXPORT phevalTargets
-    NAMESPACE pheval::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/pheval)
+    NAMESPACE phevaluator::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/phevaluator)
 
   include(CMakePackageConfigHelpers)
 
   configure_package_config_file(
-          ${CMAKE_CURRENT_SOURCE_DIR}/phevalConfig.cmake.in
-          ${CMAKE_CURRENT_BINARY_DIR}/phevalConfig.cmake
-          INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/pheval
+          ${CMAKE_CURRENT_SOURCE_DIR}/phevaluatorConfig.cmake.in
+          ${CMAKE_CURRENT_BINARY_DIR}/phevaluatorConfig.cmake
+          INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/phevaluator
           PATH_VARS
           CMAKE_INSTALL_LIBDIR)
 
   write_basic_package_version_file(
-          ${CMAKE_CURRENT_BINARY_DIR}/phevalConfigVersion.cmake
+          ${CMAKE_CURRENT_BINARY_DIR}/phevaluatorConfigVersion.cmake
           COMPATIBILITY SameMajorVersion)
 
-  install(FILES "${CMAKE_CURRENT_BINARY_DIR}/phevalConfig.cmake"
-          "${CMAKE_CURRENT_BINARY_DIR}/phevalConfigVersion.cmake"
-          DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/pheval")
+  install(FILES "${CMAKE_CURRENT_BINARY_DIR}/phevaluatorConfig.cmake"
+          "${CMAKE_CURRENT_BINARY_DIR}/phevaluatorConfigVersion.cmake"
+          DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/phevaluator")
 endif()
