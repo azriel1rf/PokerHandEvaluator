@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          lfs: true
       - name: Run before script
+        timeout-minutes: 10
         run: |
           mkdir -p cpp/build
           cd cpp/build
-          cmake .. ; make
+          cmake -DBUILD_PLO5=ON -DBUILD_PLO6=OFF .. ; make
       - name: Run script
+        timeout-minutes: 30
         run: |
           cd cpp/build
           ./c_example
@@ -67,13 +67,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          lfs: true
       - name: Run before script
+        timeout-minutes: 10
         run: |
           mkdir -p cpp/build
           cd cpp/build
-          cmake .. ; make
+          cmake -DBUILD_PLO5=ON -DBUILD_PLO6=OFF .. ; make
       - name: Run script
         run: |
           cd cpp/build
