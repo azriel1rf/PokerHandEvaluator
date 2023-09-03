@@ -83,7 +83,7 @@ EvaluateRandomPlo6Cards        3441 ns         3313 ns       210607
 | Random 7-card Hands | 100 | 1778 ns | 56 M/s |
 | Random PLO4 Hands | 100 | 3054 ns | 32 M/s |
 | Random PLO5 Hands | 100 | 3300 ns | 30 M/s |
-| Random PLO5 Hands | 100 | 3441 ns | 29 M/s |
+| Random PLO6 Hands | 100 | 3441 ns | 29 M/s |
 
 * The performance on random samples are slightly worse due to the overhead
 of accessing the pre-generated random samples in the memory.
