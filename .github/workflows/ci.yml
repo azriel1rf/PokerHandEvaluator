@@ -17,16 +17,22 @@ jobs:
         run: |
           mkdir -p cpp/build
           cd cpp/build
-          cmake -DBUILD_PLO5=ON -DBUILD_PLO6=OFF .. ; make
+          cmake -DBUILD_PLO6=OFF .. ; make
       - name: Run script
         timeout-minutes: 30
         run: |
           cd cpp/build
           ./c_example
           ./cpp_example
-          ./omaha_example
+          ./plo4_example
           ./plo5_example
+          ./evaluator5_standalone_example
+          ./evaluator6_standalone_example
+          ./evaluator7_standalone_example
           ./unit_tests
+          ./unit_tests_evaluator5_standalone
+          ./unit_tests_evaluator6_standalone
+          ./unit_tests_evaluator7_standalone
 #     - name: Setup Zig
 #       uses: goto-bus-stop/setup-zig@v1.3.0
 #       with:

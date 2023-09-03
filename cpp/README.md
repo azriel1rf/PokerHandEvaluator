@@ -39,28 +39,16 @@ cmake ..
 make pheval
 ```
 
-### Build with zig
+### Build in Windows
 
-This library can also be build with zig which supports many platforms and cross compilation scenarios.  In order to do so, [install a zig compiler](https://github.com/ziglang/zig#installation) for your platform (minimum version 0.9) and run `zig build` with some combination of the following flags:
+The unit tests depends on Google Test suite, which isn't available in Windows.
+This way allows us to build the libraries and examples.
 
-```console
-# show available build options
-$ zig build --help
-
-# create an optimized zig-out/lib/libpheval.a (or .lib on windows) 
-$ zig build -Drelease-fast
-
-# create an optimized zig-out/lib/libpheval.so (or .dll/.pdb on windows)
-$ zig build -Ddynamic -Drelease-fast
-
-# cross-compile for windows from another platform. creates zig-out/lib/libpheval.dll/pdb
-$ zig build -Dtarget=x86_64-windows -Drelease-fast
-
-# create zig-out/lib/libphevalomaha.a 
-$ zig build -Domaha -Drelease-fast
-
-# create example executables in zig-out/bin/
-$ zig build examples
+```
+mkdir -p build
+cd build
+cmake -DBUILD_TESTS=OFF ..
+make
 ```
 
 ### Build with GNU Make
@@ -78,11 +66,69 @@ cd examples
 make
 ```
 
-## Use the library
+## Using the libraries
 
-After building the library `libpheval.a`, you can add the `./include`
+After running `make`, you can see the following library files generated:
+
+```
+libpheval.a      # library pheval
+libpheval5.a     # library pheval5
+libpheval6.a     # library pheval6
+libpheval7.a     # library pheval7
+libphevalplo4.a  # library phevalplo4
+libphevalplo5.a  # library phevalplo5
+libphevalplo6.a  # library phevalplo6
+```
+
+#### pheval
+
+The corresponding library file is `libpheval.a`.
+
+This library includes 5-card, 6-card, and 7-card evaluators.
+
+It also includes all the methods of describing a rank. However, the additional
+memory usage of these rank describing methods is significantly high (356k), due
+to the rank description table declared in `src/7462.c`.
+
+The example usage of this library can be found in `examples/c_example.c` and
+`examples/cpp_example.cc`.
+
+#### pheval5, pheval6, and pheval7
+
+The corresponding library files are `libpheval5.a`, `libpheval6.a`, and
+`libpheval7.a`.
+
+These libraries are memory optimized for evaluating 5-card hands, 6-card hands,
+and 7-card hands respectively.
+
+These libraries don't include the rank describing methods, in order to save the
+memory usage.
+
+The example usage of these libraries can be found in
+`examples/evaluator5_standalone_example.cc`,
+`examples/evaluator6_standalone_example.cc` and
+`examples/evaluator7_standalone_example.cc`.
+
+#### phevalplo4, phevalplo5, and phevalplo6
+
+The corresponding library files are `libphevalplo4.a`, `libphevalplo5.a`, and
+`libphevalplo6.a`.
+
+These libraries are made for evaluator Pot Limit Omaha 4 (standard Omaha) hands,
+Pot Limit Omaha 5 hands, and Pot Limit Omaha 6 hands respectively.
+
+These libraries also include all the methods of describing a rank. The additional
+memory usage of these rank describing methods is insignificant compared to the
+memory usage of the basic omaha evaluators.
+
+The example usage of these libraries can be found in `examples/plo4_example.cc`,
+`examples/plo5_example.cc` and `examples/plo6_example.cc`.
+
+### Linking the library
+
+After building the libraries, you can add the `./include`
 directory to your includes path, and link the library to your source
-code. In addition, at least C++11 standard is required.
+code. In addition, at least C++11 standard is required for compiling.
 
 For example:
 

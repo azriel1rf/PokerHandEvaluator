@@ -2,11 +2,10 @@ CC=gcc
 CXX=g++
 TOPDIR=..
 INCLUDE=${TOPDIR}/include
-SRC=${TOPDIR}/src
 CFLAGS+=-std=c99
 CXXFLAG+=-std=c++17
 
-all: c_example cpp_example omaha_example plo5_example
+all: c_example cpp_example plo4_example plo5_example plo6_example
 
 c_example: c_example.c ../libpheval.a
 	${CC} ${CFLAGS} -I${INCLUDE} $^ -o $@
@@ -14,20 +13,26 @@ c_example: c_example.c ../libpheval.a
 cpp_example: cpp_example.cc ../libpheval.a
 	${CXX} ${CFLAGS} ${CXXFLAG} -I${INCLUDE} $^ -o $@
 
-omaha_example: omaha_example.cc ../libphevalomaha.a
+plo4_example: plo4_example.cc ../libphevalplo4.a
 	${CXX} ${CFLAGS} ${CXXFLAG} -I${INCLUDE} $^ -o $@
 
 plo5_example: plo5_example.cc ../libphevalplo5.a
 	${CXX} ${CFLAGS} ${CXXFLAG} -I${INCLUDE} $^ -o $@
 
+plo6_example: plo6_example.cc ../libphevalplo6.a
+	${CXX} ${CFLAGS} ${CXXFLAG} -I${INCLUDE} $^ -o $@
+
 ../libpheval.a:
 	$(MAKE) -C ../;
 
-../libphevalomaha.a:
-	$(MAKE) -C ../ libphevalomaha.a
+../libphevalplo4.a:
+	$(MAKE) -C ../ libphevalplo4.a
 
 ../libphevalplo5.a:
 	$(MAKE) -C ../ libphevalplo5.a
+
+../libphevalplo6.a:
+	$(MAKE) -C ../ libphevalplo6.a
 
 %.o: %.cc
 	${CXX} -c ${CXXFLAG} -I${INCLUDE} $< -o $@
@@ -36,4 +41,4 @@ plo5_example: plo5_example.cc ../libphevalplo5.a
 	${CC} -c ${CFLAGS} -I${INCLUDE} $< -o $@
 
 clean:
-	rm -f *.o c_example cpp_example omaha_example plo5_example
+	rm -f *.o c_example cpp_example plo4_example plo5_example plo6_example
