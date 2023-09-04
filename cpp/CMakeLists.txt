@@ -27,7 +27,6 @@ add_library(pheval STATIC
   src/evaluator7.cc
   src/evaluator7.c
   src/hash.c
-  src/hand.cc
   src/hashtable.c
   src/hashtable5.c
   src/hashtable6.c
@@ -116,7 +115,6 @@ if (BUILD_PLO4)
     src/evaluator_plo4.cc
     src/tables_plo4.c
     src/hash.c
-    src/hand.cc
     src/hashtable.c
     src/rank.c
     src/7462.c
@@ -150,7 +148,6 @@ if (BUILD_PLO5)
     src/evaluator_plo5.cc
     src/tables_plo5.c
     src/hash.c
-    src/hand.cc
     src/hashtable.c
     src/rank.c
     src/7462.c
@@ -183,7 +180,6 @@ if (BUILD_PLO6)
     src/evaluator_plo6.cc
     src/tables_plo6.c
     src/hash.c
-    src/hand.cc
     src/hashtable.c
     src/rank.c
     src/7462.c
