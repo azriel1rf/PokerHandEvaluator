@@ -26,6 +26,7 @@ add_library(pheval STATIC
   src/evaluator6.c
   src/evaluator7.cc
   src/evaluator7.c
+  src/tables_bitwise.c
   src/hash.c
   src/hashtable.c
   src/hashtable5.c
@@ -48,6 +49,7 @@ set_target_properties(pheval PROPERTIES
 if (BUILD_CARD5)
   add_library(pheval5 STATIC
     src/dptables.c
+    src/tables_bitwise.c
     src/evaluator5.c
     src/evaluator5.cc
     src/hashtable5.c
@@ -69,6 +71,7 @@ endif()
 if (BUILD_CARD6)
   add_library(pheval6 STATIC
     src/dptables.c
+    src/tables_bitwise.c
     src/evaluator6.c
     src/evaluator6.cc
     src/hashtable6.c
@@ -90,6 +93,7 @@ endif()
 if (BUILD_CARD7)
   add_library(pheval7 STATIC
     src/dptables.c
+    src/tables_bitwise.c
     src/evaluator7.c
     src/evaluator7.cc
     src/hashtable7.c
@@ -113,6 +117,7 @@ if (BUILD_PLO4)
     src/dptables.c
     src/evaluator_plo4.c
     src/evaluator_plo4.cc
+    src/tables_bitwise.c
     src/tables_plo4.c
     src/hash.c
     src/hashtable.c
@@ -146,6 +151,7 @@ if (BUILD_PLO5)
     src/dptables.c
     src/evaluator_plo5.c
     src/evaluator_plo5.cc
+    src/tables_bitwise.c
     src/tables_plo5.c
     src/hash.c
     src/hashtable.c
@@ -178,6 +184,7 @@ if (BUILD_PLO6)
     src/dptables.c
     src/evaluator_plo6.c
     src/evaluator_plo6.cc
+    src/tables_bitwise.c
     src/tables_plo6.c
     src/hash.c
     src/hashtable.c

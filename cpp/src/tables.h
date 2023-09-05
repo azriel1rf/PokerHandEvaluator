@@ -17,6 +17,9 @@
 #ifndef TABLES_H
 #define TABLES_H
 
+extern const short bit_of_mod_4_x_3[52];
+extern const short bit_of_div_4[52];
+
 extern const short flush[8192];
 extern const short noflush5[6175];
 extern const short noflush6[18395];
@@ -36,5 +39,4 @@ extern const short noflush_plo5[6175 * 6175];
 
 extern const short flush_plo6[8192 * 8192];
 extern const short noflush_plo6[6175 * 18395];
-
 #endif // TABLES_H

@@ -43,22 +43,6 @@ static int hash_binary(const int binary, int k)
   return sum;
 }
 
-static short binaries_by_id[52] = {
-  0x1,  0x1,  0x1,  0x1,
-  0x2,  0x2,  0x2,  0x2,
-  0x4,  0x4,  0x4,  0x4,
-  0x8,  0x8,  0x8,  0x8,
-  0x10,  0x10,  0x10,  0x10,
-  0x20,  0x20,  0x20,  0x20,
-  0x40,  0x40,  0x40,  0x40,
-  0x80,  0x80,  0x80,  0x80,
-  0x100,  0x100,  0x100,  0x100,
-  0x200,  0x200,  0x200,  0x200,
-  0x400,  0x400,  0x400,  0x400,
-  0x800,  0x800,  0x800,  0x800,
-  0x1000,  0x1000,  0x1000,  0x1000,
-};
-
 /*
  * Card id, ranged from 0 to 51.
  * The two least significant bits represent the suit, ranged from 0-3.
@@ -90,18 +74,17 @@ int evaluate_plo4_cards(int c1, int c2, int c3, int c4, int c5,
     if (suit_count_board[i] >= 3 && suit_count_hole[i] >= 2) {
       // flush
       int suit_binary_board[4] = {0};
-
-      suit_binary_board[c1 & 0x3] |= binaries_by_id[c1];
-      suit_binary_board[c2 & 0x3] |= binaries_by_id[c2];
-      suit_binary_board[c3 & 0x3] |= binaries_by_id[c3];
-      suit_binary_board[c4 & 0x3] |= binaries_by_id[c4];
-      suit_binary_board[c5 & 0x3] |= binaries_by_id[c5];
+      suit_binary_board[c1 & 0x3] |= bit_of_div_4[c1]; // (1 << (c1 / 4))
+      suit_binary_board[c2 & 0x3] |= bit_of_div_4[c2]; // (1 << (c2 / 4))
+      suit_binary_board[c3 & 0x3] |= bit_of_div_4[c3]; // (1 << (c3 / 4))
+      suit_binary_board[c4 & 0x3] |= bit_of_div_4[c4]; // (1 << (c4 / 4))
+      suit_binary_board[c5 & 0x3] |= bit_of_div_4[c5]; // (1 << (c5 / 4))
 
       int suit_binary_hole[4] = {0};
-      suit_binary_hole[h1 & 0x3] |= binaries_by_id[h1];
-      suit_binary_hole[h2 & 0x3] |= binaries_by_id[h2];
-      suit_binary_hole[h3 & 0x3] |= binaries_by_id[h3];
-      suit_binary_hole[h4 & 0x3] |= binaries_by_id[h4];
+      suit_binary_hole[h1 & 0x3] |= bit_of_div_4[h1]; // (1 << (h1 / 4))
+      suit_binary_hole[h2 & 0x3] |= bit_of_div_4[h2]; // (1 << (h2 / 4))
+      suit_binary_hole[h3 & 0x3] |= bit_of_div_4[h3]; // (1 << (h3 / 4))
+      suit_binary_hole[h4 & 0x3] |= bit_of_div_4[h4]; // (1 << (h4 / 4))
 
       if (suit_count_board[i] == 3 && suit_count_hole[i] == 2) {
         value_flush = flush[suit_binary_board[i] | suit_binary_hole[i]];
