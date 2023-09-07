@@ -68,6 +68,14 @@ int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g);
  * The last four parameters are the hole cards of the player
  */
 int evaluate_plo4_cards(int c1, int c2, int c3, int c4, int c5,
+                        int h1, int h2, int h3, int h4);
+
+/*
+ * The first five parameters are the community cards on the board
+ * The last four parameters are the hole cards of the player
+ * Alias of evaluate_plo4_cards
+ */
+int evaluate_omaha_cards(int c1, int c2, int c3, int c4, int c5,
                          int h1, int h2, int h3, int h4);
 
 /*
@@ -109,9 +117,20 @@ Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
  * The last four parameters are the hole cards of the player
  */
 Rank EvaluatePlo4Cards(const Card& c1, const Card& c2, const Card& c3,
+                       const Card& c4, const Card& c5,
+                       const Card& h1, const Card& h2,
+                       const Card& h3, const Card& h4);
+
+/*
+ * The first five parameters are the community cards on the board
+ * The last four parameters are the hole cards of the player
+ * Alias of EvaluatePlo4Cards
+ */
+Rank EvaluateOmahaCards(const Card& c1, const Card& c2, const Card& c3,
                         const Card& c4, const Card& c5,
                         const Card& h1, const Card& h2,
                         const Card& h3, const Card& h4);
+
 /*
  * The first five parameters are the community cards on the board
  * The last five parameters are the hole cards of the player

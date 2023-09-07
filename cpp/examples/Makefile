@@ -5,7 +5,7 @@ INCLUDE=${TOPDIR}/include
 CFLAGS+=-std=c99
 CXXFLAG+=-std=c++17
 
-all: c_example cpp_example plo4_example plo5_example plo6_example
+all: c_example cpp_example plo4_example omaha_example plo5_example plo6_example
 
 c_example: c_example.c ../libpheval.a
 	${CC} ${CFLAGS} -I${INCLUDE} $^ -o $@
@@ -14,6 +14,9 @@ cpp_example: cpp_example.cc ../libpheval.a
 	${CXX} ${CFLAGS} ${CXXFLAG} -I${INCLUDE} $^ -o $@
 
 plo4_example: plo4_example.cc ../libphevalplo4.a
+	${CXX} ${CFLAGS} ${CXXFLAG} -I${INCLUDE} $^ -o $@
+
+omaha_example: omaha_example.cc ../libphevalplo4.a
 	${CXX} ${CFLAGS} ${CXXFLAG} -I${INCLUDE} $^ -o $@
 
 plo5_example: plo5_example.cc ../libphevalplo5.a
@@ -41,4 +44,4 @@ plo6_example: plo6_example.cc ../libphevalplo6.a
 	${CC} -c ${CFLAGS} -I${INCLUDE} $< -o $@
 
 clean:
-	rm -f *.o c_example cpp_example plo4_example plo5_example plo6_example
+	rm -f *.o c_example cpp_example plo4_example omaha_example plo5_example plo6_example

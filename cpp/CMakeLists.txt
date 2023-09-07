@@ -344,6 +344,11 @@ if (BUILD_EXAMPLES)
       examples/plo4_example.cc
     )
     target_link_libraries(plo4_example phevalplo4)
+
+    add_executable(omaha_example
+      examples/omaha_example.cc
+    )
+    target_link_libraries(omaha_example phevalplo4)
   endif()
 
   if (BUILD_PLO5)

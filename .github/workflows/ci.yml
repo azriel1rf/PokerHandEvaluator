@@ -24,6 +24,7 @@ jobs:
           cd cpp/build
           ./c_example
           ./cpp_example
+          ./omaha_example
           ./plo4_example
           ./plo5_example
           ./evaluator5_standalone_example
