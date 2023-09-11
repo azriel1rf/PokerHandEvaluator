@@ -48,8 +48,10 @@ This way allows us to build the libraries and examples.
 mkdir -p build
 cd build
 cmake -DBUILD_TESTS=OFF ..
-make
 ```
+
+After successfully running the `cmake` command, each build target will generate a
+`.vcxproj` file, which is a project file that can be imported to Visual Studio.
 
 ### Build with GNU Make
 
