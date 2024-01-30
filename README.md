@@ -6,7 +6,7 @@ A Poker Hand Evaluator based on a Perfect Hash Algorithm
 
 ## Overview
 
-Efficiently evaluating a poker hand has been an interesting but challenging
+Efficiently evaluating a poker hand has been an interesting and challenging
 problem. Given two different poker hands, how to determine which one is
 stronger? Or more generally, given one poker hand, can we assign a score to
 it indicating its strength?
