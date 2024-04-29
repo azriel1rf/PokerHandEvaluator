@@ -166,3 +166,9 @@ An article about Monte Carlo simulation of Texas Hold'em.
 [Estimating the outcome of a Texas hold’em game using Monte Carlo simulation](https://petrosdemetrakopoulos.medium.com/estimating-the-outcome-of-a-texas-holdem-game-using-monte-carlo-simulation-1be35be29036)
 
 It's source code is in https://github.com/petrosDemetrakopoulos/TexasHoldemMonteCarloSimulation
+
+## Contributing to this repository
+
+All contributions are welcome. A contribution can be as small as reporting a bug by creating an issue.
+
+If you plan to create a Pull Request, please find more details in [CONTRIBUTING.md](CONTRIBUTING.md).
